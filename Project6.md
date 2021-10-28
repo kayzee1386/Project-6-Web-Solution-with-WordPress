@@ -1,4 +1,4 @@
-###    Project 6 - Web Solution with Wordpress
+#    Project 6 - Web Solution with Wordpress
 
 This project is about deploying a storage infrastructure on two Linux servers and implement a basic web solution using WordPress.
 
@@ -8,3 +8,4 @@ It's going to be in two parts, which are;
 
 *Also, installations of WordPress and connecting it to a remote MySQL database server. This part of the project will solidify skills of deploying Web and DB tiers of Web solution.*
 
+### This Project also speaks on three-tier client-server software architecture 
