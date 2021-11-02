@@ -65,4 +65,43 @@ Also this , ``sudo lvcreate -n apps-lv -L 14G webdata-vg
         sudo lvcreate -n logs-lv -L 14G webdata-vg``
         
 ![status-check1](https://user-images.githubusercontent.com/46185705/139869924-ad395919-c740-493b-ba80-2f4c0e0ce246.jpg)
+![verifying](https://user-images.githubusercontent.com/46185705/139874706-e829a2e3-0900-4749-9a92-f8ae76ebbf5c.jpg)
+
+The mkfs.ext4 was used to format the logical volume to ext4 file systems
+
+```
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+__/var/www/html__ was created to store website files likewise this __/home/recovery/logs__ was to store backup of log data
+
+`sudo rsync -av /var/log/. /home/recovery/logs/` was used to backup all the files in the log directory __/var/log__ into __/home/recovery/logs__ (This is required before mounting the file system)
+
+![2](https://user-images.githubusercontent.com/46185705/139878279-45797f88-b6ca-447b-a886-9addc17bc1d7.jpg) 
+
+UUID of the device was used to update the /etc/fstab file using `sudo blkid` and subsequently updated with `sudo vi /etc/fstab`
+
+`sudo mount -a and sudo systemctl daemon-reload` was used to test the configuration and daemon was reloaded
+
+![verifying](https://user-images.githubusercontent.com/46185705/139884491-23d168b9-e231-43dc-8d71-e2fa4d2afbb8.jpg)
+
+
+_STEP 2:_ Preparation of the Database Server 
+
+The second RedHat Instance was launched which is going to serve as the DB-Server. The same steps for the Web Server was followed but instead of apps-lv i created db-lv and mount it to /db directory instead of /var/www/html/.
+
+![web-DB-servers](https://user-images.githubusercontent.com/46185705/139864297-4c7ef9c3-3161-4de6-b6ba-fad0a617883e.jpg)
+
+
+_STEP 3:_ WordPress installations on the Webserver
+
+The repository was updated using `sudo yum -y update`. Followed by installation of the wget, Apache and it’s dependencies `sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
+
+![apache-enabled](https://user-images.githubusercontent.com/46185705/139891208-ae64fede-9f4a-41f6-8723-977ddc77274e.jpg)
+
+![wget-others](https://user-images.githubusercontent.com/46185705/139891257-4683193d-73de-4783-8b80-08267a9ca279.jpg)
+
+![release8](https://user-images.githubusercontent.com/46185705/139891323-93cce709-a076-4358-a040-3b602a1cad45.jpg)
+
+
 
