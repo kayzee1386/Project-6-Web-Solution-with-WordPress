@@ -57,4 +57,12 @@ lvm2 package was installed `sudo yum install lvm2` and verified using `sudo lvmd
 
 ![pvcreate](https://user-images.githubusercontent.com/46185705/139868501-39fe375f-a7de-4e95-9785-b88834d79b0c.jpg)
 
+To add all the 3 PVs to a volume group, this command was used `sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1`
+
+![status-check](https://user-images.githubusercontent.com/46185705/139869892-b2700cce-dbf8-4245-b2fa-57c1b147a3af.jpg)
+
+Also this , ``sudo lvcreate -n apps-lv -L 14G webdata-vg
+        sudo lvcreate -n logs-lv -L 14G webdata-vg``
+        
+![status-check1](https://user-images.githubusercontent.com/46185705/139869924-ad395919-c740-493b-ba80-2f4c0e0ce246.jpg)
 
