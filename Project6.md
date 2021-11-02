@@ -95,7 +95,26 @@ The second RedHat Instance was launched which is going to serve as the DB-Server
 
 _STEP 3:_ WordPress installations on the Webserver
 
-The repository was updated using `sudo yum -y update`. Followed by installation of the wget, Apache and it’s dependencies `sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
+The repository was updated using `sudo yum -y update`. Followed by installation of the wget, Apache and it’s dependencies `sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`. 
+
+Apache started  ```
+                 sudo systemctl enable httpd
+                 sudo systemctl start httpd
+                ```
+
+PHP and it's other dependencies were installed using the following commands;
+
+```
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+sudo yum module list php
+sudo yum module reset php
+sudo yum module enable php:remi-7.4
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+setsebool -P httpd_execmem 1
+```
 
 ![apache-enabled](https://user-images.githubusercontent.com/46185705/139891208-ae64fede-9f4a-41f6-8723-977ddc77274e.jpg)
 
@@ -104,4 +123,22 @@ The repository was updated using `sudo yum -y update`. Followed by installation 
 ![release8](https://user-images.githubusercontent.com/46185705/139891323-93cce709-a076-4358-a040-3b602a1cad45.jpg)
 
 
+Wordpress was downloaded and copied to var/www/html using the following commands;
+             
+```
+  mkdir wordpress
+  cd   wordpress
+  sudo wget http://wordpress.org/latest.tar.gz
+  sudo tar xzvf latest.tar.gz
+  sudo rm -rf latest.tar.gz
+  cp wordpress/wp-config-sample.php wordpress/wp-config.php
+  cp -R wordpress /var/www/html/
+```
+
+SELinux policies were configured with the following commands;
+```
+  sudo chown -R apache:apache /var/www/html/wordpress
+  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+  sudo setsebool -P httpd_can_network_connect=1
+```
 
