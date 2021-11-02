@@ -142,3 +142,15 @@ SELinux policies were configured with the following commands;
   sudo setsebool -P httpd_can_network_connect=1
 ```
 
+
+__Step 4:__ — Install MySQL on your DB Server EC2
+
+
+```
+sudo yum update
+sudo yum install mysql-server
+```
+Verify that the service is up and running by using sudo systemctl status mysqld, if it is not running, restart the service and enable it so it will be running even after reboot:
+
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
