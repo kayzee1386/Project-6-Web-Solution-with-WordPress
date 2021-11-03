@@ -175,3 +175,18 @@ exit
 ![mysql-select](https://user-images.githubusercontent.com/46185705/140048022-a8b6798e-8236-4580-8022-7ea353be7dd9.jpg)
 
 
+__Step 6:__ — WordPress configured to connect to the remote database.
+
+__MySQL port 3306 was opened on DB Server EC2__
+
+Mysql client was installed and tested from the web server to the DB server. 
+
+```
+sudo yum install mysql
+sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
+```
+
+![error](https://user-images.githubusercontent.com/46185705/140050565-6f8e817b-44fa-46f8-80dd-3e7fd0b1b485.jpg)
+![Wordpress-page](https://user-images.githubusercontent.com/46185705/140050569-accd1946-6a98-48ef-acbd-5889f9b30589.jpg)
+![wp-load-page](https://user-images.githubusercontent.com/46185705/140050571-79a5a4bd-0c38-45d3-9830-29b7e38c1f5e.jpg)
+![wallaaaaah!!!](https://user-images.githubusercontent.com/46185705/140050555-c9e2ca7a-d660-43ad-98c4-c733f424e1b1.jpg)
