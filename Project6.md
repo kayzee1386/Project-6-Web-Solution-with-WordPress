@@ -143,7 +143,7 @@ SELinux policies were configured with the following commands;
 ```
 
 
-__Step 4:__ — Install MySQL on your DB Server EC2
+__Step 4:__ — MySQL installed on DB Server-EC2
 
 
 ```
@@ -151,6 +151,27 @@ sudo yum update
 sudo yum install mysql-server
 ```
 Verify that the service is up and running by using sudo systemctl status mysqld, if it is not running, restart the service and enable it so it will be running even after reboot:
-
+```
 sudo systemctl restart mysqld
 sudo systemctl enable mysqld
+```
+
+![mysql-serevr-started](https://user-images.githubusercontent.com/46185705/140047951-842d0e44-d088-4385-aefa-f3479477bd4f.jpg)
+
+
+__Step 5:__ — Database configured to work with WordPress
+
+```
+sudo mysql
+CREATE DATABASE wordpress;
+CREATE USER `myuser`@`<Web-Server-Private-IP-Address>` IDENTIFIED BY 'mypass';
+GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+exit
+```
+![telnet-databse-server](https://user-images.githubusercontent.com/46185705/140048015-5f9c67f9-c0ba-40db-b542-83c403449e90.jpg)
+![mysql-create](https://user-images.githubusercontent.com/46185705/140048020-82c88329-0c79-4d12-9f34-3725ec14a42e.jpg)
+![mysql-select](https://user-images.githubusercontent.com/46185705/140048022-a8b6798e-8236-4580-8022-7ea353be7dd9.jpg)
+
+
